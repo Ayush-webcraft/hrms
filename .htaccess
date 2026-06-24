@@ -1,0 +1,16 @@
+# Apache: route everything that isn't a real file/folder to the front controller.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keep direct access to existing files (assets) working.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Never serve the SQLite database or app source over HTTP.
+<FilesMatch "\.(sqlite|sqlite-shm|sqlite-wal|sql)$">
+    Require all denied
+</FilesMatch>
