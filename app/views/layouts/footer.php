@@ -1,7 +1,11 @@
+<?php if (Auth::check()): ?>
+        </main>
+    </div>
+</div>
+<?php else: ?>
 </main>
-<footer class="site-footer">
-    <span>HRMS — HR Attendance &amp; Payroll Management · Built with PHP &amp; PDO</span>
-</footer>
+</div>
+<?php endif; ?>
 <script src="<?= e(asset('js/app.js')) ?>"></script>
 </body>
 </html>

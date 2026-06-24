@@ -1,12 +1,11 @@
-// Small progressive-enhancement helpers. The app works fine without JS.
-
-// Auto-dismiss flash alerts after a few seconds.
+// Auto-dismiss Alpine alert divs (those with x-data="{ v: true }") after 5s.
+// Alpine handles the fade via x-transition; we just flip the flag.
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.alert').forEach(function (el) {
-        setTimeout(function () {
-            el.style.transition = 'opacity .4s ease';
-            el.style.opacity = '0';
-            setTimeout(function () { el.remove(); }, 400);
-        }, 4000);
-    });
+    setTimeout(function () {
+        document.querySelectorAll('[x-data*="v: true"]').forEach(function (el) {
+            if (el._x_dataStack) {
+                el._x_dataStack[0].v = false;
+            }
+        });
+    }, 5000);
 });
